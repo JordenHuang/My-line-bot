@@ -88,7 +88,7 @@ def callback():
         
         # print(f"{event_type} {user_id} {user_message} {chatroom_id}\n\n{events}\n")
 
-        '''
+        
         # 排除所有不是#或' '(空格)開頭的訊息
         if user_message[0] != "#" and user_message[0] != ' ':
             continue
@@ -113,18 +113,17 @@ def callback():
                 
                 except:
                     reply_msg = "Some error happend!\nPlease check your command or contact the author"
-            '''
             
-        reply_msg = f"{user_message}"
+            
             # send the message
-        with ApiClient(configuration) as api_client:
-            line_bot_api = MessagingApi(api_client)
-            line_bot_api.reply_message_with_http_info(
-                ReplyMessageRequest(
-                    reply_token=event.reply_token,
-                    messages=[TextMessage(text=reply_msg)]
+            with ApiClient(configuration) as api_client:
+                line_bot_api = MessagingApi(api_client)
+                line_bot_api.reply_message_with_http_info(
+                    ReplyMessageRequest(
+                        reply_token=event.reply_token,
+                        messages=[TextMessage(text=reply_msg)]
+                    )
                 )
-            )
 
     return 'OK'
 
