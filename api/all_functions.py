@@ -1,5 +1,5 @@
 from api.element_picker import ElementPicker
-# from learning_bot import LearningBot as LearningBotV2
+from api.learning_bot import LearningBot as LearningBotV2
 
 def show_commands():
     reply_msg = (
@@ -33,16 +33,16 @@ def determine_functions(msg:str):
 
     
     
-    # elif command_name in ["#學習 help", "#learn help"]:
-    #     lb = LearningBotV2()
-    #     reply_msg = lb.help()
-    # elif command_name in ["#學習", "# 學習", "#learn", "# learn"]:
-    #     lb = LearningBotV2()
-    #     reply_msg = lb.main(user_question=command[1], new_answer=command[2], to_teach=True)
+    elif command_name in ["#學習 help", "#learn help"]:
+        lb = LearningBotV2()
+        reply_msg = lb.help()
+    elif command_name in ["#學習", "# 學習", "#learn", "# learn"]:
+        lb = LearningBotV2()
+        reply_msg = lb.main(user_question=command[1], new_answer=command[2], to_teach=True)
     
-    # elif msg[0] == ' ':
-    #     lb = LearningBotV2()
-    #     reply_msg = lb.main(msg[1:])
+    elif msg[0] == ' ':
+        lb = LearningBotV2()
+        reply_msg = lb.main(msg[1:])
     
     else:
         reply_msg = "Unknow command"
