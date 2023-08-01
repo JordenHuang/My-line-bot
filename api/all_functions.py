@@ -38,20 +38,20 @@ def determine_functions(msg:str):
             lb = LearningBotV2()
             reply_msg = lb.help()
         except:
-            raise Exception("41")
+            reply_msg = "Command format not CORRECT!\n指令格式不正確"
     elif command_name in ["#學習", "# 學習", "#learn", "# learn"]:
         try:
             lb = LearningBotV2()
             reply_msg = lb.main(user_question=command[1], new_answer=command[2], to_teach=True)
         except:
-            raise Exception("47")
+            reply_msg = "Command format not CORRECT!\n指令格式不正確"
     
     elif msg[0] == ' ':
         try:
             lb = LearningBotV2()
             reply_msg = lb.main(msg[1:])
         except:
-            raise Exception("54")
+            reply_msg = "Command format not CORRECT!\n指令格式不正確"
     
     else:
         reply_msg = "Unknow command"
@@ -74,4 +74,4 @@ def test(times=10):
 
 
 # print(show_commands())
-# test(5)
+test(5)
