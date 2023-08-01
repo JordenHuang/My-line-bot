@@ -93,30 +93,26 @@ def callback():
             continue
         
         else:
-            try:
-                reply_msg = ''
+            reply_msg = ''
+            
+            if len(user_message) == 1:
+                reply_msg = "- 輸入 #help 來查看指令目錄"
+                reply_msg += "\n- 可使用 #echo 來echo"
+            
+            elif user_message == "#help":
+                reply_msg = show_commands()
+            
+            elif user_message[0:5] == "#echo":
+                # echo 功能
+                reply_msg = f"你說了: {user_message[5:]}"
+            
+            else:
+                try:
+                    reply_msg = determine_functions(msg=user_message)
                 
-                if len(user_message) == 1:
-                    reply_msg = "- 輸入 #help 來查看指令目錄"
-                    reply_msg += "\n- 可使用 #echo 來測試Bot目前是否有在工作"
-                
-                elif user_message == "#help":
-                    reply_msg = show_commands()
-                
-                elif user_message[0:5] == "#echo":
-                    # echo 功能
-                    reply_msg = f"你說了: {user_message[5:]}"
-                
-                else:
-                    try:
-                        reply_msg = determine_functions(msg=user_message)
-                    
-                    except:
-                        reply_msg = "Some error happend!\nPlease check your command or contact the author"
+                except:
+                    reply_msg = "Some error happend!\nPlease check your command or contact the author"
 
-            except:
-                print("SOme error happened!")
-                reply_msg = "SOme error happened!"
             
             
             # send the message
