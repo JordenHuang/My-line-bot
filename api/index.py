@@ -94,7 +94,7 @@ def callback():
         
         else:
             reply_msg = ''
-            
+            '''
             if len(user_message) == 1:
                 reply_msg = "- 輸入 #help 來查看指令目錄"
                 reply_msg += "\n- 可使用 #echo 來測試Bot目前是否有在工作"
@@ -113,8 +113,8 @@ def callback():
                 except:
                     reply_msg = "Some error happend!\nPlease check your command or contact the author"
 
-
-            
+            '''
+            reply_msg += f"你說了: {user_message}"
             # send the message
             with ApiClient(configuration) as api_client:
                 line_bot_api = MessagingApi(api_client)
