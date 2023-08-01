@@ -1,5 +1,5 @@
-from restaurant_picker import RestaurantPicker
-from learning_bot import LearningBot
+from api.restaurant_picker import RestaurantPicker
+from api.learning_bot import LearningBot
 
 
 def show_commands():
