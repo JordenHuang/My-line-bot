@@ -38,20 +38,20 @@ def determine_functions(msg:str):
             lb = LearningBotV2()
             reply_msg = lb.help()
         except:
-            reply_msg = "41"
+            raise Exception("41")
     elif command_name in ["#學習", "# 學習", "#learn", "# learn"]:
         try:
             lb = LearningBotV2()
             reply_msg = lb.main(user_question=command[1], new_answer=command[2], to_teach=True)
         except:
-            reply_msg = "47"
+            raise Exception("47")
     
     elif msg[0] == ' ':
         try:
             lb = LearningBotV2()
             reply_msg = lb.main(msg[1:])
         except:
-            reply_msg = "54"
+            raise Exception("54")
     
     else:
         reply_msg = "Unknow command"
