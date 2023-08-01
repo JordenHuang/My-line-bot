@@ -54,7 +54,7 @@ app = Flask(__name__)
 def home():
     return 'Hello, World!'
 
-'''
+
 @app.route("/callback", methods=['POST'])
 def callback():
     signature = request.headers['X-Line-Signature']
@@ -126,7 +126,7 @@ def callback():
                 )
 
     return 'OK'
-'''
+
 
 
 
