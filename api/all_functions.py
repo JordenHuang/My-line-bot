@@ -74,4 +74,4 @@ def test(times=10):
 
 
 # print(show_commands())
-test(5)
+# test(5)
