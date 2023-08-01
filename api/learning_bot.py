@@ -5,7 +5,7 @@ import pygsheets.worksheet
 
 from difflib import get_close_matches
 from random import choice
-# import pandas as pd
+import pandas
 
 
 class LearningBot:
@@ -51,7 +51,7 @@ class LearningBot:
             raise Exception("Error! Check authorization key or sheet url")
 
         try:
-            self.work_sheet = sheet.worksheet_by_title("sheet1")
+            self.work_sheet:pygsheets.worksheet = sheet.worksheet_by_title("sheet1")
         except pygsheets.SpreadsheetNotFound:
             raise Exception("Work sheet NOT found")
 
