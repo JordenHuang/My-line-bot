@@ -27,10 +27,11 @@ import sys
 # functionalities
 from api.all_functions import show_commands, determine_functions
 
-
-channel_secret = os.environ.get('LINE_CHANNEL_SECRET')
-channel_access_token = os.environ.get('LINE_CHANNEL_ACCESS_TOKEN')
-
+try:
+    channel_secret = os.environ.get('LINE_CHANNEL_SECRET')
+    channel_access_token = os.environ.get('LINE_CHANNEL_ACCESS_TOKEN')
+except:
+    raise Exception("Som e error happened")
 
 if channel_secret is None:
     print('Specify LINE_CHANNEL_SECRET as environment variable.')
