@@ -39,7 +39,7 @@ class LearningBot:
         self.list_dataframe = list()
     
     
-    def __get_known_questions_from_google_sheet(self):
+    def get_known_questions_from_google_sheet(self):
         try:
             gc = pygsheets.authorize(service_account_env_var="GOOGLE_SECRET_KEY")
 
@@ -59,7 +59,7 @@ class LearningBot:
         self.rows = self.dataframe.shape[0]
     
     
-    def __turn_dataframe_to_list(self):
+    def turn_dataframe_to_list(self):
         # print("to_numpy and list test:\n", self.dataframe.to_numpy(dtype=str).tolist(), type(self.dataframe.to_numpy(dtype=str).tolist()))
         self.list_dataframe = list()
         
@@ -68,7 +68,7 @@ class LearningBot:
             self.list_dataframe += [list(filter(None, temp_list[i]))]
     
     
-    def __find_best_matched_question(self, user_question:str, percentage:int =0.87):
+    def find_best_matched_question(self, user_question:str, percentage:int =0.87):
         questions = [self.list_dataframe[row][0] for row in range(self.rows)]
 
         match = get_close_matches(user_question, questions, n=1, cutoff=percentage)
@@ -81,13 +81,13 @@ class LearningBot:
         return match_question_index
 
 
-    def __answer_the_question(self, question_index: int):
+    def answer_the_question(self, question_index: int):
         answers = self.list_dataframe[question_index][1:]
         
         return choice(answers)
     
     
-    def __teach_the_bot(self, matched_question_index:int =None, new_question:str =None, new_answer:str =None, question_already_learned=False):
+    def teach_the_bot(self, matched_question_index:int =None, new_question:str =None, new_answer:str =None, question_already_learned=False):
         # the dataframe row and col starts from 0, but the google work sheet starts from 1
         
         if question_already_learned == True:
@@ -101,19 +101,19 @@ class LearningBot:
         not_learn_reply = ["沒學過，也許你可以教我🙂?", "聽不懂😓，也許你能教我😘?", "沒聽過但這個好酷😍\n也許你可以教我😊?"]
         learn_reply = ["學習到新知識囉~", "新知識GET!", "謝謝seafood的教導~"]
         
-        self.__get_known_questions_from_google_sheet()
-        self.__turn_dataframe_to_list()
+        self.get_known_questions_from_google_sheet()
+        self.turn_dataframe_to_list()
         
         # print(self.list_dataframe)
         
         # if the user is going to have a conversation with the bot, 
         if to_teach == False:
             # then find the best matched question
-            matched_question_index = self.__find_best_matched_question(user_question)
+            matched_question_index = self.find_best_matched_question(user_question)
             
             # if the best matched question is found, then answer it
             if matched_question_index != None:
-                self.reply_msg = self.__answer_the_question(matched_question_index)
+                self.reply_msg = self.answer_the_question(matched_question_index)
             
             # if not found, reply with one of the not_learn_reply
             else:
@@ -122,7 +122,7 @@ class LearningBot:
         # if the user is going to teach the bot, 
         else:
             # then find the exact question if it's in all the questions that the bot knows
-            matched_question_index = self.__find_best_matched_question(user_question, percentage=1)
+            matched_question_index = self.find_best_matched_question(user_question, percentage=1)
             
             # if find a exact the same question, then add a new answer in the question's answers
             if matched_question_index != None:
@@ -130,12 +130,12 @@ class LearningBot:
                 if new_answer in self.list_dataframe[matched_question_index][1:]:
                     self.reply_msg = "我已經學過了悠~"
                 else:
-                    self.__teach_the_bot(matched_question_index=matched_question_index, new_answer=new_answer, question_already_learned=True)
+                    self.teach_the_bot(matched_question_index=matched_question_index, new_answer=new_answer, question_already_learned=True)
                     self.reply_msg = choice(learn_reply)
             
             # if not found the exact same one, then add a new question and an answer
             else:
-                self.__teach_the_bot(new_question=user_question, new_answer=new_answer, question_already_learned=False)
+                self.teach_the_bot(new_question=user_question, new_answer=new_answer, question_already_learned=False)
                 self.reply_msg = choice(learn_reply)
         
         return self.reply_msg
