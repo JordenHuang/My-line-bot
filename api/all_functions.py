@@ -1,5 +1,5 @@
-from element_picker import ElementPicker
-from learning_bot import LearningBot as LearningBotV2
+from api.element_picker import ElementPicker
+from api.learning_bot import LearningBot as LearningBotV2
 
 import logging
 
