@@ -1,5 +1,5 @@
-from api.element_picker import ElementPicker
-from api.learning_bot import LearningBot as LearningBotV2
+from element_picker import ElementPicker
+from learning_bot import LearningBot as LearningBotV2
 
 import logging
 
@@ -26,6 +26,7 @@ def determine_functions(msg:str):
 
     reply_msg = ''
     
+    # TODO: 這裡也要加try except
     if command_name in ["#抽 help", "#pick help"]:
         ep = ElementPicker()
         reply_msg = ep.help()
@@ -40,7 +41,7 @@ def determine_functions(msg:str):
             lb = LearningBotV2()
             reply_msg = lb.help()
         except:
-            logging.exception("Error occurred at 43")
+            # logging.exception("Error occurred at 43")
             reply_msg = "Command format not CORRECT!\n指令格式不正確"
             
     elif command_name in ["#學習", "# 學習", "#learn", "# learn"]:
@@ -48,7 +49,7 @@ def determine_functions(msg:str):
             lb = LearningBotV2()
             reply_msg = lb.main(user_question=command[1], new_answer=command[2], to_teach=True)
         except:
-            logging.exception("Error occurred at 51")
+            # logging.exception("Error occurred at 51")
             reply_msg = "Command format not CORRECT!\n指令格式不正確"
     
     elif msg[0] == ' ':
@@ -56,7 +57,7 @@ def determine_functions(msg:str):
             lb = LearningBotV2()
             reply_msg = lb.main(msg[1:])
         except:
-            logging.exception("Error occurred at 59")
+            # logging.exception("Error occurred at 59")
             reply_msg = "Command format not CORRECT!\n指令格式不正確"
     
     else:
