@@ -25,7 +25,7 @@ import sys
 
 
 # functionalities
-from api.all_functions import show_commands, determine_functions
+# from api.all_functions import show_commands, determine_functions
 
 
 channel_secret = os.environ.get('LINE_CHANNEL_SECRET')
