@@ -23,6 +23,7 @@ from linebot.v3.webhooks import (
 import os
 import sys
 
+import pygsheets
 
 # functionalities
 from api.learning_bot import LearningBot
@@ -98,8 +99,13 @@ def callback():
             
 
             try:
-                lb = LearningBot()
-                reply_msg = lb.main(user_message[1:])
+                gc = pygsheets.authorize(service_account_env_var="GOOGLE_SECRET_KEY")
+
+                sheet_url = os.environ.get("GOOGLE_SHEET_URL_LEARNINGBOT")
+                
+                reply_msg = f"{os.environ.get('GOOGLE_SECRET_KEY')}\n\n{sheet_url}\nline 52"
+                # lb = LearningBot()
+                # reply_msg = lb.main(user_message[1:])
             
             except:
                 reply_msg = "Some error happend!\nPlease check your command or contact the author"
