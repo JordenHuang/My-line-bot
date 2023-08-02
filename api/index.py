@@ -28,12 +28,13 @@ import logging
 # functionalities
 from api.learning_bot import LearningBot
 
-
+print(31)
 channel_secret = os.environ.get('LINE_CHANNEL_SECRET')
 channel_access_token = os.environ.get('LINE_CHANNEL_ACCESS_TOKEN')
+print(34)
 gc = os.environ.get("GOOGLE_SECRET_KEY")
 sheet_url = os.environ.get("GOOGLE_SHEET_URL_LEARNINGBOT")
-
+print(37)
 if gc is None:
     print('Specify gc as environment variable.')
     sys.exit(1)
