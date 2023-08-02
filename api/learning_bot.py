@@ -49,12 +49,14 @@ class LearningBot:
             sheet_url = os.environ.get("GOOGLE_SHEET_URL_LEARNINGBOT")
             sheet = gc.open_by_url(sheet_url)            
         except:
-            raise Exception("Error! Check authorization key or sheet url")
+            self.reply_msg = "Error! Check authorization key or sheet url"
+            # raise Exception("Error! Check authorization key or sheet url")
 
         try:
             self.work_sheet:pygsheets.Worksheet = sheet.worksheet_by_title("sheet1")
         except pygsheets.SpreadsheetNotFound:
-            raise Exception("Work sheet NOT found")
+            self.reply_msg = "Work sheet NOT found"
+            # raise Exception("Work sheet NOT found")
 
         self.dataframe = self.work_sheet.get_as_df(has_header=False, include_tailing_empty=False)
         
@@ -117,11 +119,11 @@ class LearningBot:
             
             # if the best matched question is found, then answer it
             if matched_question_index != None:
-                self.reply_msg = self.answer_the_question(matched_question_index)
+                self.reply_msg += self.answer_the_question(matched_question_index)
             
             # if not found, reply with one of the not_learn_reply
             else:
-                self.reply_msg = choice(not_learn_reply)
+                self.reply_msg += choice(not_learn_reply)
         
         # if the user is going to teach the bot, 
         else:
@@ -132,15 +134,15 @@ class LearningBot:
             if matched_question_index != None:
                 # if the new answer is already learned
                 if new_answer in self.list_dataframe[matched_question_index][1:]:
-                    self.reply_msg = "我已經學過了悠~"
+                    self.reply_msg += "我已經學過了悠~"
                 else:
                     self.teach_the_bot(matched_question_index=matched_question_index, new_answer=new_answer, question_already_learned=True)
-                    self.reply_msg = choice(learn_reply)
+                    self.reply_msg += choice(learn_reply)
             
             # if not found the exact same one, then add a new question and an answer
             else:
                 self.teach_the_bot(new_question=user_question, new_answer=new_answer, question_already_learned=False)
-                self.reply_msg = choice(learn_reply)
+                self.reply_msg += choice(learn_reply)
         
         return self.reply_msg
     
