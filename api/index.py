@@ -24,9 +24,9 @@ import os
 import sys
 
 import pygsheets
-import logging
+
 # functionalities
-from api.learning_bot import LearningBot
+# from api.learning_bot import LearningBot
 
 channel_secret = os.environ.get('LINE_CHANNEL_SECRET')
 channel_access_token = os.environ.get('LINE_CHANNEL_ACCESS_TOKEN')
