@@ -170,9 +170,9 @@ class LearningBot:
 
 
 
-app = LearningBot()
+# app = LearningBot()
 # print(app.help())
-app.test()
+# app.test()
 
 
 '''
