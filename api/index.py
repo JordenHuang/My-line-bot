@@ -25,7 +25,7 @@ import sys
 
 
 # functionalities
-from api.all_functions import show_commands, determine_functions
+from api.learning_bot import LearningBot
 
 
 channel_secret = os.environ.get('LINE_CHANNEL_SECRET')
@@ -96,23 +96,13 @@ def callback():
         else:
             reply_msg = ''
             
-            if len(user_message) == 1:
-                reply_msg = "- 輸入 #help 來查看指令目錄"
-                reply_msg += "\n- 可使用 #echo 來echo"
+
+            try:
+                lb = LearningBot()
+                reply_msg = lb.main(user_message[1:])
             
-            elif user_message == "#help":
-                reply_msg = show_commands()
-            
-            elif user_message[0:5] == "#echo":
-                # echo 功能
-                reply_msg = f"你說了: {user_message[5:]}"
-            
-            else:
-                try:
-                    reply_msg = determine_functions(msg=user_message)
-                
-                except:
-                    reply_msg = "Some error happend!\nPlease check your command or contact the author"
+            except:
+                reply_msg = "Some error happend!\nPlease check your command or contact the author"
             
             
             # send the message

@@ -39,6 +39,7 @@ class LearningBot:
         
         self.reply_msg = ''
         self.list_dataframe = list()
+
     
     
     def get_known_questions_from_google_sheet(self):
