@@ -25,7 +25,7 @@ import sys
 
 
 # functionalities
-from learning_bot import LearningBot
+from api.learning_bot import LearningBot
 
 
 channel_secret = os.environ.get('LINE_CHANNEL_SECRET')
