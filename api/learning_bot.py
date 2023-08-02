@@ -57,6 +57,7 @@ class LearningBot:
             self.work_sheet:pygsheets.Worksheet = sheet.worksheet_by_title("sheet1")
         except pygsheets.SpreadsheetNotFound:
             self.reply_msg += "Work sheet NOT found"
+            self.not_ok = True
             # raise Exception("Work sheet NOT found")
 
         self.dataframe = self.work_sheet.get_as_df(has_header=False, include_tailing_empty=False)
@@ -112,6 +113,8 @@ class LearningBot:
         if self.not_ok == True:
             return self.reply_msg
         self.turn_dataframe_to_list()
+        if self.not_ok == True:
+            return self.reply_msg
         
         # print(self.list_dataframe)
         
@@ -167,9 +170,9 @@ class LearningBot:
 
 
 
-# app = LearningBot()
+app = LearningBot()
 # print(app.help())
-# app.test()
+app.test()
 
 
 '''
