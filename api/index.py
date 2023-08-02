@@ -30,14 +30,14 @@ import pygsheets
 
 channel_secret = os.environ.get('LINE_CHANNEL_SECRET')
 channel_access_token = os.environ.get('LINE_CHANNEL_ACCESS_TOKEN')
-# gc = os.environ.get("GOOGLE_SECRET_KEY")
-# sheet_url = os.environ.get("GOOGLE_SHEET_URL_LEARNINGBOT")
-# if gc is None:
-#     print('Specify gc as environment variable.')
-#     sys.exit(1)
-# if sheet_url is None:
-#     print('Specify url as environment variable.')
-#     sys.exit(1)
+gc = os.environ.get("GOOGLE_SECRET_KEY")
+sheet_url = os.environ.get("GOOGLE_SHEET_URL_LEARNINGBOT")
+if gc is None:
+    print('Specify gc as environment variable.')
+    sys.exit(1)
+if sheet_url is None:
+    print('Specify url as environment variable.')
+    sys.exit(1)
 
 if channel_secret is None:
     print('Specify LINE_CHANNEL_SECRET as environment variable.')
