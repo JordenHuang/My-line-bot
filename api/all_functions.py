@@ -1,5 +1,7 @@
+import os
+
 from api.element_picker import ElementPicker
-from api.learning_bot import LearningBot as LearningBotV2
+from api.learning_bot_v3 import LearningBot
 
 
 def show_commands():
@@ -22,43 +24,49 @@ def determine_functions(msg:str):
     command = msg.split(sep='\n')
     command_name = command[0]
     # print("command name:", command_name)
+    # print("msg:", msg)
 
     reply_msg = ''
+    key = ''
+    url = ''
     
-    # TODO: 這裡也要加try except
-    if command_name in ["#抽 help", "#pick help"]:
-        ep = ElementPicker()
-        reply_msg = ep.help()
-    elif command_name in ["#抽", "# 抽", "#pick", "# pick"]:
-        ep = ElementPicker()
-        reply_msg = ep.main(command[1:])
+    try:
+        key = os.environ.get("GOOGLE_SECRET_KEY")
+        url = os.environ.get("GOOGLE_SHEET_URL_LEARNINGBOT")
+    except:
+        reply_msg = "secret key or url not found"
+        return reply_msg
+    
+    
+    try:
+        if command_name in ["#抽 help", "#pick help"]:
+            ep = ElementPicker()
+            reply_msg += ep.help()
+        elif command_name in ["#抽", "# 抽", "#pick", "# pick"]:
+            ep = ElementPicker()
+            reply_msg += ep.main(command[1:])
 
+        
+        
+        elif command_name in ["#學習 help", "#learn help"]:
+            lb = LearningBot(key, url)
+            reply_msg += lb.help()
+                
+        elif command_name in ["#學習", "# 學習", "#learn", "# learn"]:
+            lb = LearningBot(key, url)
+            reply_msg += lb.main(user_question=command[1], new_answer=command[2], to_teach=True)
+        
+        elif msg[0] == ' ':
+            lb = LearningBot(key, url)
+            reply_msg += lb.main(msg[1:])
+
+        
+        else:
+            reply_msg += "Unknow command"
     
-    
-    elif command_name in ["#學習 help", "#learn help"]:
-        try:
-            lb = LearningBotV2()
-            reply_msg = lb.help()
-        except:
-            reply_msg = "Command format not CORRECT!\n指令格式不正確"
-            
-    elif command_name in ["#學習", "# 學習", "#learn", "# learn"]:
-        try:
-            lb = LearningBotV2()
-            reply_msg = lb.main(user_question=command[1], new_answer=command[2], to_teach=True)
-        except:
-            reply_msg = "Command format not CORRECT!\n指令格式不正確"
-    
-    elif msg[0] == ' ':
-        try:
-            lb = LearningBotV2()
-            reply_msg = lb.main(msg[1:])
-        except:
-            reply_msg = "Command format not CORRECT!\n指令格式不正確"
-    
-    else:
-        reply_msg = "Unknow command"
-    
+    except:
+        reply_msg += "Command format not CORRECT!\n指令格式不正確"
+        
     return reply_msg
 
 
