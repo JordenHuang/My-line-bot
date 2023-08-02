@@ -72,7 +72,7 @@ class LearningBot:
         # print("to_numpy and list test:\n", self.dataframe.to_numpy(dtype=str).tolist(), type(self.dataframe.to_numpy(dtype=str).tolist()))
         self.list_dataframe = list()
         
-        temp_list = self.dataframe.to_numpy(dtype=str).tolist()
+        temp_list = self.dataframe.to_numpy(dtype='str').tolist()
         for i in range(len(temp_list)):
             self.list_dataframe += [list(filter(None, temp_list[i]))]
     
