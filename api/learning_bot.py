@@ -49,13 +49,14 @@ class LearningBot:
             sheet_url = os.environ.get("GOOGLE_SHEET_URL_LEARNINGBOT")
             sheet = gc.open_by_url(sheet_url)            
         except:
-            self.reply_msg = "Error! Check authorization key or sheet url"
+            self.reply_msg += "Error! Check authorization key or sheet url"
+            self.not_ok = True
             # raise Exception("Error! Check authorization key or sheet url")
 
         try:
             self.work_sheet:pygsheets.Worksheet = sheet.worksheet_by_title("sheet1")
         except pygsheets.SpreadsheetNotFound:
-            self.reply_msg = "Work sheet NOT found"
+            self.reply_msg += "Work sheet NOT found"
             # raise Exception("Work sheet NOT found")
 
         self.dataframe = self.work_sheet.get_as_df(has_header=False, include_tailing_empty=False)
@@ -106,7 +107,10 @@ class LearningBot:
         not_learn_reply = ["沒學過，也許你可以教我🙂?", "聽不懂😓，也許你能教我😘?", "沒聽過但這個好酷😍\n也許你可以教我😊?"]
         learn_reply = ["學習到新知識囉~", "新知識GET!", "謝謝seafood的教導~"]
         
+        self.not_ok = False
         self.get_known_questions_from_google_sheet()
+        if self.not_ok == True:
+            return self.reply_msg
         self.turn_dataframe_to_list()
         
         # print(self.list_dataframe)
