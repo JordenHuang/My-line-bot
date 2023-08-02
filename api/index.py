@@ -97,8 +97,14 @@ def callback():
             
 
             try:
-                lb = LearningBot()
-                reply_msg = lb.main(user_message[1:])
+                import pygsheets
+                import pygsheets.spreadsheet
+                import pygsheets.worksheet
+                
+                from difflib import get_close_matches
+                from random import choice
+                # lb = LearningBot()
+                # reply_msg = lb.main(user_message[1:])
             
             except:
                 reply_msg = "Some error happend!\nPlease check your command or contact the author"
