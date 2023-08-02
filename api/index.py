@@ -24,7 +24,7 @@ import os
 import sys
 
 import pygsheets
-
+import logging
 # functionalities
 from api.learning_bot import LearningBot
 
@@ -99,10 +99,11 @@ def callback():
             
 
             try:
+                logging.exception("Error occurred at 102")
                 gc = pygsheets.authorize(service_account_env_var="GOOGLE_SECRET_KEY")
-
+                logging.exception("Error occurred at 104")
                 sheet_url = os.environ.get("GOOGLE_SHEET_URL_LEARNINGBOT")
-                
+                logging.exception("Error occurred at 106")
                 reply_msg = f"{os.environ.get('GOOGLE_SECRET_KEY')}\n\n{sheet_url}\nline 52"
                 # lb = LearningBot()
                 # reply_msg = lb.main(user_message[1:])
