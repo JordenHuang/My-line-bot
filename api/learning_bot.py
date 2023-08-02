@@ -47,10 +47,11 @@ class LearningBot:
             gc = pygsheets.authorize(service_account_env_var="GOOGLE_SECRET_KEY")
 
             sheet_url = os.environ.get("GOOGLE_SHEET_URL_LEARNINGBOT")
-            sheet = gc.open_by_url(sheet_url)            
+            sheet = gc.open_by_url(sheet_url)
         except:
             self.reply_msg += "Error! Check authorization key or sheet url"
             self.not_ok = True
+            return
             # raise Exception("Error! Check authorization key or sheet url")
 
         try:
@@ -58,6 +59,7 @@ class LearningBot:
         except pygsheets.SpreadsheetNotFound:
             self.reply_msg += "Work sheet NOT found"
             self.not_ok = True
+            return
             # raise Exception("Work sheet NOT found")
 
         self.dataframe = self.work_sheet.get_as_df(has_header=False, include_tailing_empty=False)
