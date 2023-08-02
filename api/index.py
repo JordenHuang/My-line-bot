@@ -31,7 +31,15 @@ from api.learning_bot import LearningBot
 
 channel_secret = os.environ.get('LINE_CHANNEL_SECRET')
 channel_access_token = os.environ.get('LINE_CHANNEL_ACCESS_TOKEN')
+gc = os.environ.get("GOOGLE_SECRET_KEY")
+sheet_url = os.environ.get("GOOGLE_SHEET_URL_LEARNINGBOT")
 
+if gc is None:
+    print('Specify gc as environment variable.')
+    sys.exit(1)
+if sheet_url is None:
+    print('Specify url as environment variable.')
+    sys.exit(1)
 
 if channel_secret is None:
     print('Specify LINE_CHANNEL_SECRET as environment variable.')
@@ -99,11 +107,6 @@ def callback():
             
 
             try:
-                logging.exception("Error occurred at 102")
-                gc = pygsheets.authorize(service_account_env_var="GOOGLE_SECRET_KEY")
-                logging.exception("Error occurred at 104")
-                sheet_url = os.environ.get("GOOGLE_SHEET_URL_LEARNINGBOT")
-                logging.exception("Error occurred at 106")
                 reply_msg = f"{os.environ.get('GOOGLE_SECRET_KEY')}\n\n{sheet_url}\nline 52"
                 # lb = LearningBot()
                 # reply_msg = lb.main(user_message[1:])
