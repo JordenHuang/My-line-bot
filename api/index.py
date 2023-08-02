@@ -23,21 +23,13 @@ from linebot.v3.webhooks import (
 import os
 import sys
 
-import pygsheets
 
 # functionalities
-# from api.learning_bot import LearningBot
+from learning_bot import LearningBot
+
 
 channel_secret = os.environ.get('LINE_CHANNEL_SECRET')
 channel_access_token = os.environ.get('LINE_CHANNEL_ACCESS_TOKEN')
-gc = os.environ.get("GOOGLE_SECRET_KEY")
-sheet_url = os.environ.get("GOOGLE_SHEET_URL_LEARNINGBOT")
-if gc is None:
-    print('Specify gc as environment variable.')
-    sys.exit(1)
-if sheet_url is None:
-    print('Specify url as environment variable.')
-    sys.exit(1)
 
 if channel_secret is None:
     print('Specify LINE_CHANNEL_SECRET as environment variable.')
@@ -101,16 +93,15 @@ def callback():
             continue
         
         else:
-            reply_msg = '123-456'
+            reply_msg = ''
             
 
-            # try:
-                # reply_msg = f"{os.environ.get('GOOGLE_SECRET_KEY')}\n\n{sheet_url}\nline 52"
-                # lb = LearningBot()
-                # reply_msg = lb.main(user_message[1:])
+            try:
+                lb = LearningBot()
+                reply_msg = lb.main(user_message[1:])
             
-            # except:
-            #     reply_msg = "Some error happend!\nPlease check your command or contact the author"
+            except:
+                reply_msg = "Some error happend!\nPlease check your command or contact the author"
             
             
             # send the message

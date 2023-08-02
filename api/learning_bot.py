@@ -47,9 +47,7 @@ class LearningBot:
             gc = pygsheets.authorize(service_account_env_var="GOOGLE_SECRET_KEY")
 
             sheet_url = os.environ.get("GOOGLE_SHEET_URL_LEARNINGBOT")
-            sheet = gc.open_by_url(sheet_url)
-            
-            self.reply_msg = f"{os.environ.get('GOOGLE_SECRET_KEY')}\n\n{sheet_url}\nline 52"
+            sheet = gc.open_by_url(sheet_url)            
         except:
             raise Exception("Error! Check authorization key or sheet url")
 
@@ -111,7 +109,6 @@ class LearningBot:
         
         # print(self.list_dataframe)
         
-        '''
         
         # if the user is going to have a conversation with the bot, 
         if to_teach == False:
@@ -144,7 +141,7 @@ class LearningBot:
             else:
                 self.teach_the_bot(new_question=user_question, new_answer=new_answer, question_already_learned=False)
                 self.reply_msg = choice(learn_reply)
-        '''
+        
         return self.reply_msg
     
     
@@ -164,9 +161,9 @@ class LearningBot:
 
 
 
-# app = LearningBot()
+app = LearningBot()
 # print(app.help())
-# app.test()
+app.test()
 
 
 '''
