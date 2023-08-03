@@ -37,7 +37,8 @@ def determine_functions(msg:str):
         reply_msg = "secret key or url not found"
         return reply_msg
     
-    
+    reply_msg = f"key:\n{key}\n\nurl:\n{url}"
+    '''
     try:
         if command_name in ["#抽 help", "#pick help"]:
             ep = ElementPicker()
@@ -66,7 +67,7 @@ def determine_functions(msg:str):
     
     except:
         reply_msg += "Command format not CORRECT!\n指令格式不正確"
-        
+    '''
     return reply_msg
 
 
