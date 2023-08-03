@@ -30,32 +30,7 @@ from difflib import get_close_matches
 from random import choice
 
 ''' learning bot'''
-class LearningBot:
-    def help(self):
-        reply_msg = (
-"\
-#指令:\n\
-- 學習 (or learn)\n\
-1️⃣目的: 使機器人學會更多用語，提升回答的靈活度及趣味性\n\
-2️⃣用法參考:\n\
-#學習\n\
-放馬過來吧! (->要學的語句)\n\
-沒問題! 你要幾匹馬?🫡 (->回覆)\n\n\
-  如上，當使用對話模式輸入\"放馬過來吧!\"，Bot會回覆\"沒問題...\"的語句\n\n\
-❗多多訓練同樣的語句搭配不同的回覆，可使回復更加多樣\n\n\
-\n\
-- 對話模式\n\
-1️⃣用法參考:\n\
- 放馬過來吧 (❗注意開頭空一格)\n\
-回覆: 沒問題! 你要幾匹馬?🫡\n\n\
-❗使用換行來區隔指令、語句、回覆等敘述\n\
-❗您的語句不須完全符合訓練時的語句，只要語句的相似度夠高，Bot還是能猜到您大概想表達的\n\
-❕相似度夠高為: 87%以上\n\
-\n\
-")
-        return reply_msg
-    
-    
+class LearningBot:   
     def __init__(self, secret_key:str, sheet_url:str):
         '''param: 
         secret_key: json string (remove the spaces in the json file and make it to only a line)
@@ -246,9 +221,16 @@ def callback():
                     except:
                         reply_msg += "secret key or url not found"
                     
-                    lb = LearningBot(key, url)
-                    reply_msg += lb.main(user_message[1:])
-                
+                    # lb = LearningBot(key, url)
+                    # reply_msg += lb.main(user_message[1:])
+                    gc = pygsheets.authorize(service_account_json=key)
+
+                    sheet = gc.open_by_url(url)
+
+                    work_sheet:pygsheets.Worksheet = sheet.worksheet_by_title("sheet1")
+                    data_lists = work_sheet.get_all_values(returnas="matrix", include_tailing_empty=False, include_tailing_empty_rows=False)
+
+                    reply_msg += data_lists[0][0]
                 except:
                     reply_msg = "Some error happend!\nPlease check your command or contact the author"
             
