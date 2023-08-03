@@ -136,7 +136,7 @@ def callback():
                     data_lists = work_sheet.get_all_values(returnas="matrix", include_tailing_empty=False, include_tailing_empty_rows=False)
                     
                     matched = get_close_matches('HII', data_lists, n=1, cutoff=0.87)
-                    reply_msg += matched[0]
+                    reply_msg += str(matched[0])
                 except:
                     reply_msg = "Some error happend!\nPlease check your command or contact the author"
             
