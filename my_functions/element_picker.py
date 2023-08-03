@@ -64,7 +64,31 @@ from difflib import get_close_matches
 # from random import choice
 
 
+
+
+
+import pygsheets
+
+from difflib import get_close_matches
+# from random import choice
+
+
 class LearningBot:
+    def __init__(self, secret_key:str, sheet_url:str):
+        '''param: 
+        secret_key: json string (remove the spaces in the json file and make it to only a line)
+        
+        sheet_url: the google sheet's URL
+        '''
+        
+        
+        gc = pygsheets.authorize(service_account_json=secret_key)
+
+        sheet = gc.open_by_url(sheet_url)
+
+        self.work_sheet:pygsheets.Worksheet = sheet.worksheet_by_title("sheet1")
+    
+    
     def help(self):
         reply_msg = (\
 "\
@@ -87,23 +111,7 @@ class LearningBot:
 ❕相似度夠高為: 87%以上\n\
 \n\
 ")
-        return reply_msg
-    
-    
-    def __init__(self, secret_key:str, sheet_url:str):
-        '''param: 
-        secret_key: json string (remove the spaces in the json file and make it to only a line)
-        
-        sheet_url: the google sheet's URL
-        '''
-        
-        
-        gc = pygsheets.authorize(service_account_json=secret_key)
-
-        sheet = gc.open_by_url(sheet_url)
-
-        self.work_sheet:pygsheets.Worksheet = sheet.worksheet_by_title("sheet1")
-    
+        return reply_msg    
     
     def get_known_questions_from_google_sheet(self):
         data_lists = self.work_sheet.get_all_values(returnas="matrix", include_tailing_empty=False, include_tailing_empty_rows=False)
@@ -197,3 +205,4 @@ class LearningBot:
             
             msg = self.main(user_input, new_answer, to_teach)
             print("Bot:",msg)
+
