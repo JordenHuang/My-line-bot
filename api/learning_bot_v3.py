@@ -1,6 +1,6 @@
 import pygsheets
 
-from difflib import get_close_matches
+# from difflib import get_close_matches
 from random import choice
 
 
@@ -54,10 +54,11 @@ class LearningBot:
     def find_best_matched_question(self, data:list, user_question:str, percentage:int =0.87):
         questions = [data[row][0] for row in range(len(data))]
 
-        match = get_close_matches(user_question, questions, n=1, cutoff=percentage)
-        # print("match:", match)
-        if match != []:
-            match_question_index = questions.index(match[0])
+        # matched = get_close_matches(user_question, questions, n=1, cutoff=percentage)
+        matched = [questions[0]]
+        # print("matched:", matched)
+        if matched != []:
+            match_question_index = questions.index(matched[0])
         else:
             match_question_index = None
             
