@@ -54,11 +54,13 @@ def determine_functions(msg:str):
                 
         elif command_name in ["#學習", "# 學習", "#learn", "# learn"]:
             lb = LearningBot(key, url)
-            reply_msg += lb.main(user_question=command[1], new_answer=command[2], to_teach=True)
+            # reply_msg += lb.main(user_question=command[1], new_answer=command[2], to_teach=True)
+            reply_msg += "58"
         
         elif msg[0] == ' ':
             lb = LearningBot(key, url)
-            reply_msg += lb.main(msg[1:])
+            # reply_msg += lb.main(msg[1:])
+            reply_msg += "63"
 
         
         else:
