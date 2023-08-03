@@ -133,9 +133,9 @@ def callback():
                     sheet = gc.open_by_url(url)
 
                     work_sheet:pygsheets.Worksheet = sheet.worksheet_by_title("sheet1")
-                    # data_lists = work_sheet.get_all_values(returnas="matrix", include_tailing_empty=False, include_tailing_empty_rows=False)
+                    data_lists = work_sheet.get_all_values(returnas="matrix", include_tailing_empty=False, include_tailing_empty_rows=False)
 
-                    reply_msg += str(work_sheet.get_row(include_tailing_empty=False, row=1, returnas="matrix"))
+                    reply_msg += str(data_lists)
                 except:
                     reply_msg = "Some error happend!\nPlease check your command or contact the author"
             
