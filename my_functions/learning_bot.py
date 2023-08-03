@@ -81,6 +81,7 @@ class LearningBot:
     
     
     def main(self, user_question:str, new_answer:str|None =None ,to_teach=False):
+        '''
         not_learn_reply = ["沒學過，也許你可以教我🙂?", "聽不懂😓，也許你能教我😘?", "沒聽過但這個好酷😍\n也許你可以教我😊?"]
         learn_reply = ["學習到新知識囉~", "新知識GET!", "謝謝seafood的教導~"]
         reply_msg = ''
@@ -89,7 +90,7 @@ class LearningBot:
         # print(data, type(data))
         reply_msg = str(data)
         
-        '''
+        
         # if the user is going to have a conversation with the bot, 
         if to_teach == False:
             # then find the best matched question
@@ -122,7 +123,7 @@ class LearningBot:
                 self.teach_the_bot(data, new_question=user_question, new_answer=new_answer, question_already_learned=False)
                 reply_msg = choice(learn_reply)
         '''
-        return reply_msg
+        return "now testing seems ok"
     
     
     def test(self, times=10):
