@@ -1,7 +1,7 @@
 import os
 
 from api.element_picker import ElementPicker
-from api.learning_bot_v3 import LearningBot
+# from api.learning_bot_v3 import LearningBot
 
 
 def show_commands():
