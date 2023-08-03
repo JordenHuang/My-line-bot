@@ -25,8 +25,7 @@ import sys
 
 
 # functionalities
-# from api.all_functions import show_commands, determine_functions
-from my_functions.learning_bot import LearningBot
+from api.all_functions import show_commands, determine_functions
 
 
 channel_secret = os.environ.get('LINE_CHANNEL_SECRET')
@@ -95,16 +94,8 @@ def callback():
             continue
         
         else:
-            reply_msg = '98'
-            
-            key = os.environ.get("GOOGLE_SECRET_KEY")
-            url = os.environ.get("GOOGLE_SHEET_URL_LEARNINGBOT")
-            try:
-                lb = LearningBot(key, url)
-            except:
-                reply_msg = "105 Error"
-            
-            '''
+            reply_msg = ''
+                        
             if len(user_message) == 1:
                 reply_msg = "- 輸入 #help 來查看指令目錄"
                 reply_msg += "\n- 可使用 #echo 來echo"
@@ -123,7 +114,7 @@ def callback():
                 except:
                     reply_msg = "Some error happend!\nPlease check your command or contact the author"
             
-            '''
+            
             # send the message
             with ApiClient(configuration) as api_client:
                 line_bot_api = MessagingApi(api_client)

@@ -1,7 +1,7 @@
 import os
 
 from my_functions.element_picker import ElementPicker
-from my_functions.learning_bot import LearningBot
+# from my_functions.learning_bot_v3 import LearningBot
 
 
 def show_commands():
@@ -48,20 +48,18 @@ def determine_functions(msg:str):
 
         
         
-        elif command_name in ["#學習 help", "#learn help"]:
-            lb = LearningBot(key, url)
-            reply_msg += lb.help()
+        # elif command_name in ["#學習 help", "#learn help"]:
+        #     lb = LearningBot(key, url)
+        #     reply_msg += lb.help()
                 
-        elif command_name in ["#學習", "# 學習", "#learn", "# learn"]:
-            lb = LearningBot(key, url)
-            # reply_msg += lb.main(user_question=command[1], new_answer=command[2], to_teach=True)
-            reply_msg += "58"
+        # elif command_name in ["#學習", "# 學習", "#learn", "# learn"]:
+        #     lb = LearningBot(key, url)
+        #     reply_msg += lb.main(user_question=command[1], new_answer=command[2], to_teach=True)
         
-        elif msg[0] == ' ':
-            lb = LearningBot(key, url)
-            # reply_msg += lb.main(msg[1:])
-            reply_msg += "63"
-
+        # elif msg[0] == ' ':
+        #     lb = LearningBot(key, url)
+        #     reply_msg += lb.main(msg[1:])
+        
         
         else:
             reply_msg += "Unknow command"
