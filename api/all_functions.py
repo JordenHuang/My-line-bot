@@ -1,7 +1,7 @@
 import os
 
 from api.element_picker import ElementPicker
-# from api.learning_bot_v3 import LearningBot
+from api.learning_bot_v3 import LearningBot
 
 
 def show_commands():
@@ -38,7 +38,7 @@ def determine_functions(msg:str):
         return reply_msg
     
     reply_msg = f"key:\n{key}\n\nurl:\n{url}"
-    '''
+    
     try:
         if command_name in ["#抽 help", "#pick help"]:
             ep = ElementPicker()
@@ -49,17 +49,17 @@ def determine_functions(msg:str):
 
         
         
-        elif command_name in ["#學習 help", "#learn help"]:
-            lb = LearningBot(key, url)
-            reply_msg += lb.help()
+        # elif command_name in ["#學習 help", "#learn help"]:
+        #     lb = LearningBot(key, url)
+        #     reply_msg += lb.help()
                 
-        elif command_name in ["#學習", "# 學習", "#learn", "# learn"]:
-            lb = LearningBot(key, url)
-            reply_msg += lb.main(user_question=command[1], new_answer=command[2], to_teach=True)
+        # elif command_name in ["#學習", "# 學習", "#learn", "# learn"]:
+        #     lb = LearningBot(key, url)
+        #     reply_msg += lb.main(user_question=command[1], new_answer=command[2], to_teach=True)
         
-        elif msg[0] == ' ':
-            lb = LearningBot(key, url)
-            reply_msg += lb.main(msg[1:])
+        # elif msg[0] == ' ':
+        #     lb = LearningBot(key, url)
+        #     reply_msg += lb.main(msg[1:])
 
         
         else:
@@ -67,7 +67,7 @@ def determine_functions(msg:str):
     
     except:
         reply_msg += "Command format not CORRECT!\n指令格式不正確"
-    '''
+    
     return reply_msg
 
 
