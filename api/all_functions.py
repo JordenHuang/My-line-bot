@@ -1,7 +1,7 @@
 import os
 
-from my_functions.element_picker import LearningBot
-# from my_functions.learning_bot_v3 import LearningBot
+from my_functions.element_picker import ElementPicker
+from my_functions.learning_bot_v3 import LearningBot
 
 
 def show_commands():
@@ -39,16 +39,16 @@ def determine_functions(msg:str):
     
     
     try:
-        # if command_name in ["#抽 help", "#pick help"]:
-        #     ep = ElementPicker()
-        #     reply_msg += ep.help()
-        # elif command_name in ["#抽", "# 抽", "#pick", "# pick"]:
-        #     ep = ElementPicker()
-        #     reply_msg += ep.main(command[1:])
+        if command_name in ["#抽 help", "#pick help"]:
+            ep = ElementPicker()
+            reply_msg += ep.help()
+        elif command_name in ["#抽", "# 抽", "#pick", "# pick"]:
+            ep = ElementPicker()
+            reply_msg += ep.main(command[1:])
 
         
         
-        if command_name in ["#學習 help", "#learn help"]:
+        elif command_name in ["#學習 help", "#learn help"]:
             lb = LearningBot(key, url)
             reply_msg += lb.help()
                 
