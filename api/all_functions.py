@@ -1,7 +1,7 @@
 import os
 
 from my_functions.element_picker import ElementPicker
-from my_functions.learning_bot_v3 import LearningBot
+# from my_functions.learning_bot_v3 import LearningBot
 
 
 def show_commands():
