@@ -1,12 +1,12 @@
 import pygsheets
 
-# from difflib import get_close_matches
+from difflib import get_close_matches
 from random import choice
 
 
 class LearningBot:
     def help(self):
-        reply_msg = (\
+        reply_msg = (
 "\
 #指令:\n\
 - 學習 (or learn)\n\
@@ -54,8 +54,8 @@ class LearningBot:
     def find_best_matched_question(self, data:list, user_question:str, percentage:int =0.87):
         questions = [data[row][0] for row in range(len(data))]
 
-        # matched = get_close_matches(user_question, questions, n=1, cutoff=percentage)
-        matched = [questions[0]]
+        matched = get_close_matches(user_question, questions, n=1, cutoff=percentage)
+        
         # print("matched:", matched)
         if matched != []:
             match_question_index = questions.index(matched[0])
