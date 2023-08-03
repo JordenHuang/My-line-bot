@@ -24,17 +24,8 @@ import os
 import sys
 
 
-import pygsheets
-
-from difflib import get_close_matches
-from random import choice
-
-
-
-
-
 # functionalities
-# from api.all_functions import show_commands, determine_functions
+from api.all_functions import show_commands, determine_functions
 
 
 channel_secret = os.environ.get('LINE_CHANNEL_SECRET')
@@ -110,8 +101,7 @@ def callback():
                 reply_msg += "\n- 可使用 #echo 來echo"
             
             elif user_message == "#help":
-                # reply_msg = show_commands()
-                pass
+                reply_msg = show_commands()
             
             elif user_message[0:5] == "#echo":
                 # echo 功能
@@ -119,24 +109,8 @@ def callback():
             
             else:
                 try:
-                    # reply_msg = determine_functions(msg=user_message)
-                    try:
-                        key = os.environ.get("GOOGLE_SECRET_KEY")
-                        url = os.environ.get("GOOGLE_SHEET_URL_LEARNINGBOT")
-                    except:
-                        reply_msg += "secret key or url not found"
-                    
-                    # lb = LearningBot(key, url)
-                    # reply_msg += lb.main(user_message[1:])
-                    gc = pygsheets.authorize(service_account_json=key)
-
-                    sheet = gc.open_by_url(url)
-
-                    work_sheet:pygsheets.Worksheet = sheet.worksheet_by_title("sheet1")
-                    data_lists = work_sheet.get_all_values(returnas="matrix", include_tailing_empty=False, include_tailing_empty_rows=False)
-                    
-                    matched = get_close_matches('HII', data_lists[9], n=1, cutoff=0.87)
-                    reply_msg += matched[0]
+                    reply_msg = determine_functions(msg=user_message)
+                
                 except:
                     reply_msg = "Some error happend!\nPlease check your command or contact the author"
             
